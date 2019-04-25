@@ -1,5 +1,7 @@
 #! /bin/sh
 
+maxCapacity=80
+scrubExpire=691200
 problems=0
 
 condition=$(/sbin/zpool status | egrep -i '(DEGRADED|FAULTED|OFFLINE|UNAVAIL|REMOVED|FAIL|DESTROYED|corrupt|cannot|unrecover)')
@@ -7,8 +9,6 @@ if [ "${condition}" ]; then
         emailSubject="`hostname` - ZFS pool - HEALTH fault"
         problems=1
 fi
-
-maxCapacity=80
 
 if [ ${problems} -eq 0 ]; then
    capacity=$(/sbin/zpool list -H -o capacity | cut -d'%' -f1)
@@ -28,8 +28,6 @@ if [ ${problems} -eq 0 ]; then
         problems=1
    fi
 fi
-
-scrubExpire=691200
 
 if [ ${problems} -eq 0 ]; then
    currentDate=$(date +%s)
