@@ -43,12 +43,12 @@ if [ ${problems} -eq 0 ]; then
         break
     fi
 
-    ### FreeBSD 11.2 with *nix supported date format
+    ### FreeBSD 11.2
     #scrubRawDate=$(/sbin/zpool status $volume | grep scrub | awk '{print $15 $12 $13}')
-    #scrubDate=$(date -j -f '%Y%b%e-%H%M%S' $scrubRawDate'-000000' +%s)
-
-    ### FreeBSD 12.0 with *nix supported date format
+    
+    ### FreeBSD 12.0
     scrubRawDate=$(/sbin/zpool status $volume | grep scrub | awk '{print $17 $14 $15}')
+    
     scrubDate=$(date -j -f '%Y%b%e-%H%M%S' $scrubRawDate'-000000' +%s)
 
      if [ $(($currentDate - $scrubDate)) -ge $scrubExpire ]; then
