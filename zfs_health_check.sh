@@ -1,5 +1,9 @@
 #!/bin/sh
 
+#
+# Based on https://calomel.org/zfs_health_check_script.html by Calomel.org
+#
+
 capacityThreshold=80
 scrubThreshold=35
 emailTo="root"
