@@ -2,6 +2,7 @@
 
 maxCapacity=80
 scrubExpire=3024000
+emailTo="root@localhost"
 
 condition=$(/sbin/zpool status | egrep -i '(DEGRADED|FAULTED|OFFLINE|UNAVAIL|REMOVED|FAIL|DESTROYED|corrupt|cannot|unrecover)')
 problems=0
@@ -60,6 +61,6 @@ if [ ${problems} -eq 0 ]; then
 fi
 
 if [ "$problems" -ne 0 ]; then
-  printf '%s\n' "$emailSubject" "" "`/sbin/zpool list`" "" "`/sbin/zpool status`" | /usr/bin/mail -s "$emailSubject" root@localhost
+  printf '%s\n' "$emailSubject" "" "`/sbin/zpool list`" "" "`/sbin/zpool status`" | /usr/bin/mail -s "$emailSubject" $emailTo
   logger $emailSubject
 fi
