@@ -2,7 +2,7 @@
 
 maxCapacity=80
 scrubExpire=8
-emailTo="root@localhost"
+emailTo="root"
 
 condition=$(/sbin/zpool status | egrep -i '(DEGRADED|FAULTED|OFFLINE|UNAVAIL|REMOVED|FAIL|DESTROYED|corrupt|cannot|unrecover)')
 problems=0
