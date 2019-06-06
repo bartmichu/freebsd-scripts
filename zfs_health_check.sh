@@ -1,7 +1,7 @@
 #!/bin/sh
 
-maxCapacity=80
-scrubExpire=8
+capacityThreshold=80
+scrubThreshold=8
 emailTo="root"
 
 condition=$(/sbin/zpool status | egrep -i '(DEGRADED|FAULTED|OFFLINE|UNAVAIL|REMOVED|FAIL|DESTROYED|corrupt|cannot|unrecover)')
@@ -16,7 +16,7 @@ if [ ${problems} -eq 0 ]; then
    capacity=$(/sbin/zpool list -H -o capacity | cut -d'%' -f1)
    for line in ${capacity}
      do
-       if [ $line -ge $maxCapacity ]; then
+       if [ $line -ge $capacityThreshold ]; then
          emailSubject="`hostname` - ZFS pool - Capacity Exceeded"
          problems=1
        fi
@@ -53,7 +53,7 @@ if [ ${problems} -eq 0 ]; then
     
     scrubDate=$(date -j -f '%Y%b%e-%H%M%S' $scrubRawDate'-000000' +%s)
 
-     if [ $(($currentDate - $scrubDate)) -ge $(($scrubExpire * 24 * 60 * 60)) ]; then
+     if [ $(($currentDate - $scrubDate)) -ge $(($scrubThreshold * 24 * 60 * 60)) ]; then
         emailSubject="`hostname` - ZFS pool - Scrub Time Expired. Scrub Needed on Volume(s)"
         problems=1
      fi
