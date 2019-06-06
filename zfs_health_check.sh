@@ -1,7 +1,7 @@
 #!/bin/sh
 
 capacityThreshold=80
-scrubThreshold=8
+scrubThreshold=35
 emailTo="root"
 
 condition=$(/sbin/zpool status | egrep -i '(DEGRADED|FAULTED|OFFLINE|UNAVAIL|REMOVED|FAIL|DESTROYED|corrupt|cannot|unrecover)')
