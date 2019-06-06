@@ -53,7 +53,7 @@ if [ ${problems} -eq 0 ]; then
     
     scrubDate=$(date -j -f '%Y%b%e-%H%M%S' $scrubRawDate'-000000' +%s)
 
-     if [ $(($currentDate - $scrubDate)) -ge $($scrubExpire * 24 * 60 * 60) ]; then
+     if [ $(($currentDate - $scrubDate)) -ge $(($scrubExpire * 24 * 60 * 60)) ]; then
         emailSubject="`hostname` - ZFS pool - Scrub Time Expired. Scrub Needed on Volume(s)"
         problems=1
      fi
