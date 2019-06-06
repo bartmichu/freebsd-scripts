@@ -1,10 +1,11 @@
 #! /bin/sh
 
 maxCapacity=80
-scrubExpire=691200
-problems=0
+scrubExpire=3024000
 
 condition=$(/sbin/zpool status | egrep -i '(DEGRADED|FAULTED|OFFLINE|UNAVAIL|REMOVED|FAIL|DESTROYED|corrupt|cannot|unrecover)')
+problems=0
+
 if [ "${condition}" ]; then
         emailSubject="`hostname` - ZFS pool - HEALTH fault"
         problems=1
