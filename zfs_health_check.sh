@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 maxCapacity=80
 scrubExpire=8
