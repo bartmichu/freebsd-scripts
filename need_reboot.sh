@@ -1,7 +1,8 @@
 #!/bin/sh
 #
 
-# This script works with GENERIC kernels only.
+# This script works with unmodified GENERIC kernels distributed as a part
+# of an official FreeBSD release.
 
 email_to="root"
 email_subject="`/bin/hostname` - Reboot Required"
