@@ -6,7 +6,7 @@
 
 capacity_threshold=80
 scrub_threshold=35
-email_to="root"
+email_address="root"
 
 condition=$(/sbin/zpool status | egrep -i '(DEGRADED|FAULTED|OFFLINE|UNAVAIL|REMOVED|FAIL|DESTROYED|corrupt|cannot|unrecover)')
 problems=0
@@ -65,6 +65,6 @@ if [ ${problems} -eq 0 ]; then
 fi
 
 if [ "$problems" -ne 0 ]; then
-  printf '%s\n' "$email_subject" "" "`/sbin/zpool list`" "" "`/sbin/zpool status`" | /usr/bin/mail -s "$email_subject" $email_to
+  printf '%s\n' "$email_subject" "" "`/sbin/zpool list`" "" "`/sbin/zpool status`" | /usr/bin/mail -s "$email_subject" $email_address
   logger $email_subject
 fi
